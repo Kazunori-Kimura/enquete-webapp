@@ -1,0 +1,93 @@
+{
+  "enquetes": [
+    {
+      "title": "サンプル01",
+      "description": "アンケートサンプル01",
+      "questions": [
+        {
+          "text": "最も好きな言語は何ですか。",
+          "type": "radio",
+          "items": [
+            {
+              "text": "C/C++",
+              "isOther": false
+            },
+            {
+              "text": "C#",
+              "isOther": false
+            },
+            {
+              "text": "Java",
+              "isOther": false
+            },
+            {
+              "text": "JavaScript",
+              "isOther": false
+            },
+            {
+              "text": "その他",
+              "isOther": true
+            }
+          ],
+          "answers":[
+            {
+              "user_id": "",
+              "selected_index": 0,
+              "text": "",
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "text": "どの言語を習得したいですか。",
+          "type": "checkbox",
+          "items": [
+            {
+              "text": "C/C++",
+              "isOther": false
+            },
+            {
+              "text": "C#",
+              "isOther": false
+            },
+            {
+              "text": "Java",
+              "isOther": false
+            },
+            {
+              "text": "JavaScript",
+              "isOther": false
+            },
+            {
+              "text": "その他",
+              "isOther": true
+            }
+          ],
+          "answers": [
+            {
+              "user_id": "",
+              "selected_index": 0,
+              "text": "",
+              "comment": ""
+            }
+          ]
+        },
+        {
+          "text": "フリー入力",
+          "type": "text",
+          "answers": [
+            {
+              "user_id": "",
+              "selected_index": 0,
+              "text": "",
+              "comment": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+
+
