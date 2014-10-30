@@ -26,45 +26,130 @@
         <h1><%= title %></h1>
       </div>
 
-      <ul data-bind="foreach: enquetes">
-        <li>
-          <span data-bind="text: title"></span>
-          <ul data-bind="foreach: questions">
-            <li>
-              <span data-bind="text: text"></span>
-              <div data-bind="if: isSingle">
-                <ul data-bind="foreach: items">
-                  <li>
-                    <label>
-                      <input type="radio"
-                        data-bind="attr: {name: 'radio_' + $parent.id}, checkedValue: $parent.id + '_' + id, checked: $parent.selectedItem">
-                      <span data-bind="text: text"></span>
-                    </label>
-                  </li>
-                </ul>
-                <p class="lead" data-bind="text: selectedItem"></p>
-              </div>
-
-              <div data-bind="if: isMulti">
-                <ul data-bind="foreach: items">
-                  <li>
-                    <label>
-                      <input type="checkbox" data-bind="checked: isChecked">
-                      <span data-bind="text: text"></span>
-                    </label>
-                  </li>
-                </ul>
-              </div>
-
-              <div data-bind="if: isText">
-                <textarea cols="30" rows="3" data-bind="value: comment"></textarea>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <div data-bind="template: { name: 'tmplEnquete', foreach: enquetes }"></div>
 
     </div>
+
+<script id="tmplEnquete">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"
+        data-bind="text: title">
+      </h3>
+    </div>
+    <div class="panel-body">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label"
+            data-bind="attr: { for: 'enquete_title_' + id }">
+            Title
+          </label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control"
+              data-bind="attr: { id: 'enquete_title_' + id }, textInput: title">
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove-sign"></span>
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label"
+            data-bind="attr: { for: 'enquete_description_' + id }">
+            Description
+          </label>
+          <div class="col-sm-10">
+            <textarea class="form-control" row="3"
+              data-bind="attr: { id: 'enquete_description_' + id }, textInput: description">
+            </textarea>
+          </div>
+        </div>
+      </form>
+
+      <div data-bind="template: { name: 'tmplQuestion', foreach: questions }"></div>
+
+    </div>
+    <div class="panel-footer">
+      <button class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        add question
+      </button>
+    </div>
+  </div>
+</script>
+
+<script id="tmplQuestion" type="text/html">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title"
+        data-bind="text: text">
+      </h4>
+    </div>
+    <div class="panel-body">
+
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label"
+            data-bind="attr: { for: 'question_text_' + id }">
+            Text
+          </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"
+              data-bind="attr: { id: 'question_text_' + id }, textInput: text">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label"
+            data-bind="attr: { for: 'question_type_' + id }">
+            Type
+          </label>
+          <div class="col-sm-10">
+            <select
+              class="form-control"
+              data-bind="attr: { id: 'question_text_' + id }, options: $root.enumQuestionType, value: type">
+            </select>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+    <!-- items -->
+    <ul class="list-group"
+      data-bind="template: { name: 'tmplItem', foreach: items }">
+    </ul>
+
+    <div class="panel-footer">
+      <button class="btn btn-xs btn-primary">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        add item
+      </button>
+    </div>
+  </div>
+</script>
+
+<script id="tmplItem" type="text/html">
+  <li class="list-group-item">
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="text" data-bind="textInput: text">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" data-bind="checked: isOther">
+          <span>その他</span>
+        </label>
+      </div>
+      <button class="btn btn-xs btn-danger">
+        <span class="glyphicon glyphicon-remove-sign"></span>
+      </button>
+    </form>
+  </li>
+</script>
 
     <!-- Knockout.js -->
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js"></script>

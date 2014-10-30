@@ -48,6 +48,8 @@ function QuestionViewModel(params){
   self.selectedItem = ko.observable("");
 
   self.addItem = function(){
+    // これだと要素を削除した時にidが重複してしまう。
+    // 最後の要素のid + 1 とする
     var count = self.items().length;
     self.items.push(new ItemViewModel({ id: count }));
   };
@@ -69,6 +71,8 @@ function EnqueteViewModel(params){
 
   // 質問の追加
   self.addQuestion = function(){
+    // これだと要素を削除した時にidが重複してしまう。
+    // 最後の要素のid + 1 とする
     var count = self.questions().length;
     self.questions.push(new QuestionViewModel({ id: count }));
   };
@@ -83,6 +87,17 @@ function AppViewModel(){
   var self = this;
 
   self.enquetes = ko.observableArray([]);
+
+  self.enumQuestionType = ko.observableArray([
+      'checkbox', 'radio', 'text'
+    ]);
+
+  self.addEnquete = function(){
+    var count = self.enquetes().length;
+    self.enquetes.push(new EnqueteViewModel({
+      id: self.enquetes()[count-1].id + 1
+    }));
+  };
 
   // アンケートデータの読み込み
   function loadEnquete(){

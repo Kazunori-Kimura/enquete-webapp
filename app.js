@@ -18,6 +18,10 @@ app.get('/', function(req, res){
   res.render('index', { title: 'INDEX' });
 });
 
+app.get('/edit', function(req, res){
+  res.render('edit', { title: 'EDIT' });
+});
+
 app.get('/enquete', enquete.findAll);
 
 var server = app.listen(3000);
