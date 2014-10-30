@@ -23,17 +23,17 @@ function QuestionViewModel(params){
 
   // 単一選択時、true
   self.isSingle = ko.computed(function(){
-    return self.type === "radio";
+    return self.type() === "radio";
   });
 
   // 複数選択時、true
   self.isMulti = ko.computed(function(){
-    return self.type === "checkbox";
+    return self.type() === "checkbox";
   });
 
   // テキスト入力
   self.isText = ko.computed(function(){
-    return self.type === "text";
+    return self.type() === "text";
   });
 
   // 選択肢
